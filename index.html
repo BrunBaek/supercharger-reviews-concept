@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Supercharger Reviews — Now You Know</title>
+<meta name="description" content="Crowd-sourced video reviews of Tesla Superchargers around the world, filmed and rated by the Now You Know community.">
+<meta name="theme-color" content="#0f1115">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>">
+
+<link rel="preconnect" href="https://unpkg.com">
+<link rel="preconnect" href="https://basemaps.cartocdn.com">
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<a class="skip-link" href="#map">Skip to map</a>
+
+<header class="site-header">
+  <div class="wrap site-header__inner">
+    <a class="brand" href="#top">
+      <span class="brand__mark" aria-hidden="true">⚡</span>
+      <span class="brand__text">Now You Know <span class="brand__sub">Supercharger Reviews</span></span>
+    </a>
+    <nav class="site-nav" aria-label="Primary">
+      <a href="#map">Map</a>
+      <a href="#submit">Submit a review</a>
+      <a class="site-nav__external" href="https://www.patreon.com/NowYouKnow" target="_blank" rel="noopener">Patreon</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <section class="hero">
+    <div class="wrap">
+      <h1>Supercharger Reviews</h1>
+      <p class="hero__lede">
+        We can't thank our awesome viewers enough for going out and hunting down Tesla Superchargers and
+        filming them — telling us about amenities, ease of finding them off the highway, and more.
+      </p>
+      <dl class="stats" id="stats" aria-live="polite">
+        <div class="stats__item"><dt>Superchargers tracked</dt><dd id="stat-total">—</dd></div>
+        <div class="stats__item"><dt>With a video review</dt><dd id="stat-reviewed">—</dd></div>
+        <div class="stats__item"><dt>Countries</dt><dd id="stat-countries">—</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="app" aria-label="Supercharger map and search">
+    <div class="wrap app__wrap">
+
+      <div class="controls">
+        <div class="search-box">
+          <svg class="search-box__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 21l-4.35-4.35m1.85-5.15a7 7 0 11-14 0 7 7 0 0114 0z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          <input type="search" id="search" placeholder="Search by name, city, state, or country…" aria-label="Search Superchargers" autocomplete="off">
+        </div>
+        <label class="toggle">
+          <input type="checkbox" id="only-reviewed" checked>
+          <span>Only show reviewed locations</span>
+        </label>
+      </div>
+
+      <div class="map-layout">
+        <div id="map" role="region" aria-label="Map of Tesla Superchargers"></div>
+
+        <aside class="results-panel" id="results-panel" aria-live="polite">
+          <div class="results-panel__status">
+            <strong id="results-count">Loading…</strong>
+          </div>
+          <div class="results-panel__hint" id="results-hint">
+            <p class="muted" id="results-hint-text">Type a name, city, state, or country to search. Click a result to jump to it on the map.</p>
+            <p class="legend">
+              <span class="legend__item"><span class="pin pin--reviewed" aria-hidden="true"></span> Has a review</span>
+              <span class="legend__item"><span class="pin pin--plain" aria-hidden="true"></span> No review yet</span>
+            </p>
+          </div>
+          <ul class="results-list" id="results-list" hidden></ul>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="submit" id="submit">
+    <div class="wrap submit__wrap">
+      <div class="submit__intro">
+        <h2>Filmed a Supercharger?</h2>
+        <p>
+          Send in your video and we'll add it to the map. Tell us about the amenities, how easy it was to
+          find off the highway, and anything else future visitors should know. Landscape footage, please!
+        </p>
+        <ul class="submit__links">
+          <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSdWUjQiErHQuqtMI-pn0qFjitVayjbW9maBi2apioGpAwXTeQ/viewform" target="_blank" rel="noopener">Need to report a bug?</a></li>
+          <li><a href="https://www.youtube.com/embed/klVWGHtRTuE" target="_blank" rel="noopener">Don't know how to upload a YouTube video?</a></li>
+        </ul>
+      </div>
+      <div class="submit__form-card">
+        <iframe
+          src="https://www-nowyouknowchannel-com.filesusr.com/html/400ded_fb56c0aff8d29d8baf05efeded30ebae.html"
+          title="Supercharger review submission form"
+          loading="lazy"></iframe>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap site-footer__inner">
+    <span>© <span id="year"></span> Now You Know</span>
+    <span class="muted" id="data-updated"></span>
+  </div>
+</footer>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+<script src="js/app.js?v=2" defer></script>
+</body>
+</html>
