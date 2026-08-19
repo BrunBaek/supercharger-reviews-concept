@@ -34,12 +34,12 @@ confirmed against Tesla's own site. That's one of the open questions below.
 
 ## Running locally
 
-```bash
-python3 scripts/fetch-data.py   # optional: refresh data/superchargers.json
-python3 -m http.server 8791     # serve the site
-```
+There's no live preview URL (yet) — to see it, run it on your own machine:
 
-Then open <http://localhost:8791/>.
+1. Clone this repo and open a terminal in it.
+2. Optional — refresh the data snapshot: `python3 scripts/fetch-data.py`
+3. Start a local server: `python3 -m http.server 8791`
+4. In your browser, go to `http://localhost:8791/`
 
 ## Open questions for the Now You Know team
 
