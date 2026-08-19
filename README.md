@@ -6,7 +6,9 @@ An unofficial, fan-made redesign of the ["Now You Know" Supercharger Reviews](ht
 
 ## Status
 
-Early prototype. Not deployed anywhere public. Built and tested locally only.
+Early prototype, shared publicly as a concept. Not an official Now You Know
+project, and not deployed as a live site (yet) — see "Running locally"
+below.
 
 ## What this is
 
@@ -20,13 +22,14 @@ A responsive, modern rebuild of the Supercharger Reviews map:
 
 ## Data
 
-Location and review data comes from the same public endpoint the current
-site already loads (`projectcoups.dreamhosters.com`). `data/superchargers.json`
-is a snapshot of that data, included here so the repo runs out of the box.
-This repo is **private**, shared only with the Now You Know team for
-review — it isn't public redistribution of their database. Re-run the fetch
-script any time to refresh the snapshot (see below); if this project ever
-goes public, that snapshot should come back out (see `scripts/fetch-data.py`).
+**Credit**: `data/superchargers.json` is a snapshot of the Supercharger
+location and review data from `projectcoups.dreamhosters.com` — the same
+public, unauthenticated endpoint the current nowyouknowchannel.com
+Supercharger Reviews page already loads for every visitor. It's included
+here as-is, unmodified, so this repo runs out of the box. All credit for
+that dataset — including the review videos and ratings submitted by Now
+You Know's community — belongs to them. Re-run `scripts/fetch-data.py`
+any time to refresh the snapshot.
 
 **Known limitation**: that source isn't kept in sync with every new
 Supercharger opening — e.g. Ghent, BE was missing from it as of August 2026,
@@ -54,5 +57,8 @@ figuring out together before anything goes live:
 
 ## Rights
 
-No license granted. Shared privately for the Now You Know team's review —
-please don't redistribute.
+The code and design here are shared publicly as a concept, but no license
+is granted — all rights reserved for now. The Supercharger dataset in
+`data/superchargers.json` is not mine: see "Data" above for its source and
+credit. If you're from Now You Know and have any concerns about this repo,
+please open an issue or get in touch.
