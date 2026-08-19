@@ -1,7 +1,3 @@
-# Generated data snapshot — this is a copy of someone else's database.
-# Run scripts/fetch-data.py to regenerate it locally instead of committing it.
-data/superchargers.json
-
 # OS / editor cruft
 .DS_Store
 __pycache__/

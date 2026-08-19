@@ -21,11 +21,12 @@ A responsive, modern rebuild of the Supercharger Reviews map:
 ## Data
 
 Location and review data comes from the same public endpoint the current
-site already loads (`projectcoups.dreamhosters.com`). This repo does **not**
-include a copy of that data — `data/superchargers.json` is generated, not
-committed (see `.gitignore`), so this repo isn't redistributing a copy of
-someone else's database. Run the fetch script to pull a fresh snapshot
-before serving the site locally (see below).
+site already loads (`projectcoups.dreamhosters.com`). `data/superchargers.json`
+is a snapshot of that data, included here so the repo runs out of the box.
+This repo is **private**, shared only with the Now You Know team for
+review — it isn't public redistribution of their database. Re-run the fetch
+script any time to refresh the snapshot (see below); if this project ever
+goes public, that snapshot should come back out (see `scripts/fetch-data.py`).
 
 **Known limitation**: that source isn't kept in sync with every new
 Supercharger opening — e.g. Ghent, BE was missing from it as of August 2026,
@@ -34,7 +35,7 @@ confirmed against Tesla's own site. That's one of the open questions below.
 ## Running locally
 
 ```bash
-python3 scripts/fetch-data.py   # pulls a fresh data/superchargers.json
+python3 scripts/fetch-data.py   # optional: refresh data/superchargers.json
 python3 -m http.server 8791     # serve the site
 ```
 
