@@ -54,6 +54,13 @@ figuring out together before anything goes live:
   to be added by hand?
 - Should the review-submission form change too, or stay as-is?
 - Data ownership/hosting going forward, and who maintains what.
+- Reviews are heavily Western: 39% of tracked Superchargers in North
+  America/Europe/Australia/NZ have a review, vs. 2% everywhere else —
+  including China, which has almost as many tracked Superchargers as the
+  US (2,009) but a review on only 12 of them (0.6%). More locations from a
+  better data source won't change that by itself — it's a "who's actually
+  filming" gap, not a data gap. Might be worth a call-out to viewers in
+  Asia specifically.
 
 ## Rights
 
