@@ -60,13 +60,13 @@
     html += '<div class="meta-row">';
     html += '<span class="badge ' + statusInfo.cls + '">' + escapeHtml(statusInfo.text) + "</span>";
     if (c.stalls) html += "<span>" + c.stalls + " stalls</span>";
-    if (c.avg) html += '<span class="rating">★ ' + c.avg.toFixed(1) + "/10</span>";
+    if (c.avg != null) html += '<span class="rating">★ ' + c.avg.toFixed(1) + "/10</span>";
     html += "</div>";
 
     if (c.reviews && c.reviews.length) {
       html += '<ul class="reviews">';
       c.reviews.slice(0, 6).forEach(function (r) {
-        var label = "▶ Watch review" + (r.rating ? " (" + r.rating + "/10)" : "");
+        var label = "▶ Watch review" + (r.rating != null ? " (" + r.rating + "/10)" : "");
         html += '<li><a href="' + escapeHtml(r.link) + '" target="_blank" rel="noopener">' + label + "</a></li>";
       });
       if (c.reviews.length > 6) {
@@ -154,7 +154,7 @@
       .map(function (c) {
         var reviewed = !!(c.reviews && c.reviews.length);
         var loc = [c.city, c.state, c.country].filter(Boolean).join(", ");
-        var ratingTxt = c.avg ? " · ★ " + c.avg.toFixed(1) : "";
+        var ratingTxt = c.avg != null ? " · ★ " + c.avg.toFixed(1) : "";
         return (
           '<li><button type="button" class="result-row" data-id="' +
           c.id +
@@ -179,6 +179,7 @@
   }
 
   function applyFilter() {
+    if (!clusterGroup) return; // map never loaded (initial data fetch failed)
     var filtered = allChargers.filter(matches);
 
     clusterGroup.clearLayers();
@@ -194,20 +195,22 @@
     var charger = allChargers.find(function (c) {
       return c.id === id;
     });
-    var marker = markerById.get(id);
-    if (!charger || !marker) return;
+    if (!charger) return;
 
-    if (map.getZoom() < 12) {
-      map.once("moveend", function () {
-        clusterGroup.zoomToShowLayer(marker, function () {
-          marker.openPopup();
-        });
-      });
-    }
-    map.setView([charger.lat, charger.lng], 14, { animate: true });
-    clusterGroup.zoomToShowLayer(marker, function () {
-      marker.openPopup();
-    });
+    // Jump straight there (no animation) and open a standalone popup at the
+    // charger's own coordinates, instead of routing through the clustered
+    // marker. Two unreliable approaches were tried and rejected here, both
+    // confirmed by direct testing rather than just suspected:
+    // zoomToShowLayer's "reveal from its cluster, then call back" callback
+    // can simply never fire, and even a plain animated setView's 'moveend'
+    // reliably fails to fire for a same-zoom pan (only a zoom change seems
+    // to reliably trigger it). An instant, unanimated setView needs no
+    // completion event at all, so it can't get stuck waiting on one.
+    map.setView([charger.lat, charger.lng], 14, { animate: false });
+    L.popup({ maxWidth: 280 })
+      .setLatLng([charger.lat, charger.lng])
+      .setContent(popupHtml(charger))
+      .openOn(map);
   }
 
   function onSearchInput() {
@@ -263,10 +266,10 @@
       initMap();
       buildMarkers();
       applyFilter();
-      wireEvents();
     })
     .catch(function (err) {
       els.resultsCount.textContent = "Couldn't load Supercharger data.";
       console.error(err);
-    });
+    })
+    .then(wireEvents); // always wire up controls, even if the map/data never loaded
 })();
